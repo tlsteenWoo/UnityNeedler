@@ -14,6 +14,7 @@ Design was done on paper and mapped out.
 
 * Needle
 * NeedleSpawner
+* NeedleHost
 * Needler
 * NeedlerHolder
 * NeedlerCharacter
