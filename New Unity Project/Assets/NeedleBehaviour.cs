@@ -9,6 +9,8 @@ public class NeedleBehaviour : MonoBehaviour {
 	protected bool isStuck;
 	public float travelSpeed = 1;
 	public float lifeTime = 3;
+	public float trackStrength = 100;
+	public float trackDamping = .7f;
 	protected NeedleHost target;
 	protected float lifeLived;
 	protected float deltaTime;
@@ -79,10 +81,9 @@ public class NeedleBehaviour : MonoBehaviour {
 		//normalize
 		toTarget /= magnitude;
 		//multiply by 1/length * scalar to diminish by distance than linearly strengthen
-		float trackStrength = 100;
 		Vector3 force = toTarget * (1 / magnitude) * trackStrength;
 		rigidBody.AddForce(force);
-		rigidBody.velocity *= 0.5f;
+		rigidBody.velocity *= trackDamping;
 	}
 
 	/// <summary>
