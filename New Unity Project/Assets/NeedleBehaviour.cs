@@ -22,11 +22,17 @@ public class NeedleBehaviour : MonoBehaviour {
 		set{ target = value;}
 	}
 	protected Rigidbody rigidBody;
+	public AudioClip impactSound;
+	protected AudioSource audioSource;
 
-	// Use this for initialization
+	/// <summary>
+	/// Store references to the physics and sound components.
+	/// </summary>
 	void Start () {
 		rigidBody = GetComponent<Rigidbody> ();
+		//Initialize the needles travel
 		rigidBody.velocity = transform.forward * travelSpeed;
+		audioSource = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -69,7 +75,7 @@ public class NeedleBehaviour : MonoBehaviour {
 		rigidBody.velocity = Vector3.zero;
 		rigidBody.isKinematic = true;
 		Refresh ();
-		//TODO: Play impact sound
+		audioSource.PlayOneShot (impactSound, 1);
 		var needleHost = host.gameObject.GetComponent<NeedleHost> ();
 		if (needleHost == null)
 			return;
@@ -83,8 +89,12 @@ public class NeedleBehaviour : MonoBehaviour {
 	{
 		if (target == null || isStuck)
 			return;
+		Vector3 targetPosition = target.transform.position;
+		//use the representative if one is specified
+		if (target.representative != null)
+			targetPosition = target.representative.bounds.center;
 		//Get the vector to the target
-		Vector3 toTarget = target.transform.position - transform.position;
+		Vector3 toTarget = targetPosition - transform.position;
 		//store the length
 		float magnitude = toTarget.magnitude;
 		//normalize

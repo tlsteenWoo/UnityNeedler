@@ -30,8 +30,11 @@ public class NeedleHost : MonoBehaviour {
 	public float maxHealth = 100;
 	protected Vector3 startingPosition;
 	protected NeedleBehaviour[] needles;
-	public ParticleSystem explosion;
+	public ParticleSystem explosionVfx;
 	protected Animator animator;
+	public AudioClip explosionSound;
+	protected AudioSource audioSource;
+	public SkinnedMeshRenderer representative;
 
 	/// <summary>
 	/// Start health at maxHealth and construct needle array.
@@ -43,6 +46,7 @@ public class NeedleHost : MonoBehaviour {
 		needles = new NeedleBehaviour[explosionIndex];
 		startingPosition = transform.position;
 		animator = GetComponent<Animator> ();
+		audioSource = GetComponent<AudioSource> ();
 	}
 	
 	/// <summary>
@@ -93,8 +97,8 @@ public class NeedleHost : MonoBehaviour {
 	{
 		//Reset first in case the host dies
 		Reset ();
-		explosion.Play ();
-		//TODO: Play explosion sound
+		explosionVfx.Play ();
+		audioSource.PlayOneShot (explosionSound, 1);
 		Health -= explosionDamage;
 	}
 

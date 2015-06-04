@@ -43,8 +43,9 @@ public class NeedleSpawner : MonoBehaviour {
 		}
 
 		//refill ammo if we have infinite
-		if (infiniteAmmo)
+		if (infiniteAmmo && ammo == 0) {
 			ammo = ammoLimit;
+		}
 
 		//Try to automatically trigger
 		if (automatic) {
