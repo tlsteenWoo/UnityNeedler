@@ -13,6 +13,9 @@ public class NeedleCollision : MonoBehaviour {
 	/// <param name="other">The non-trigger impact collider.</param>
 	public void OnTriggerEnter(Collider other)
 	{
+		//If the needle is already stuck then dont impact again
+		if (needleBehaviour.isStuck)
+			return;
 		if (other.isTrigger)
 			return;
 		needleBehaviour.Impact (other);

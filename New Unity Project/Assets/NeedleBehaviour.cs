@@ -6,7 +6,9 @@ using System.Collections;
 /// It provides logic for flying and expiration.
 /// </summary>
 public class NeedleBehaviour : MonoBehaviour {
-	protected bool isStuck;
+	public bool isStuck{ get; protected set; }
+	//7 needles will kill a grunt dead
+	public int damage = 10;
 	public float travelSpeed = 1;
 	public float lifeTime = 3;
 	public float trackStrength = 100;
@@ -53,18 +55,25 @@ public class NeedleBehaviour : MonoBehaviour {
 	/// <summary>
 	/// When a NeedleProjectile Impacts, make it stick into object it hit, and refresh its life.
 	/// Play an impact sound to confirm the hit.
+	/// If a needle host is hit it has a special reaction.
 	/// </summary>
 	/// <param name="host">Host which was impacted bu the needle.</param>
 	public void Impact(Collider host)
 	{
 		isStuck = true;
+		//pull the needle out a little so it always shows
+		transform.position -= rigidBody.velocity * Time.deltaTime;
 		//attach it to the object
 		transform.SetParent (host.gameObject.transform);
-		//Rigid body is destroyed so that no more collisions or forces occur.
-		var rigidBody = GetComponent<Rigidbody> ();
-		Destroy (rigidBody);
+		//Rigid body is neutralized so that no more collision response occurs
+		rigidBody.velocity = Vector3.zero;
+		rigidBody.isKinematic = true;
 		Refresh ();
 		//TODO: Play impact sound
+		var needleHost = host.gameObject.GetComponent<NeedleHost> ();
+		if (needleHost == null)
+			return;
+		needleHost.Hit (this);
 	}
 
 	/// <summary>
@@ -100,6 +109,6 @@ public class NeedleBehaviour : MonoBehaviour {
 	public void Expire()
 	{
 		//destroy the NeedleProjectile gameObject this is attached to
-		DestroyImmediate (this.gameObject);
+		Destroy(this.gameObject);
 	}
 }

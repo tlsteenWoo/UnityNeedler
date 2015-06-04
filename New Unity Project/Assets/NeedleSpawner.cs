@@ -8,8 +8,8 @@ public class NeedleSpawner : MonoBehaviour {
 	public float spreadAngleYaw = 10;
 	public float spreadAnglePitch = 10;
 	protected bool fireReady;
-	protected int ammo = 10;
-	public int ammoLimit = 40;
+	protected int ammo = 7;
+	public int ammoLimit = 7;
 	public float fireRate = 1;
 	protected float fireRateProgress = 1;
 	/// <summary>
