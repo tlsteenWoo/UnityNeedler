@@ -9,12 +9,20 @@ public class NeedleBehaviour : MonoBehaviour {
 	protected bool isStuck;
 	public float travelSpeed = 1;
 	public float lifeTime = 3;
+	protected NeedleHost target;
 	protected float lifeLived;
 	protected float deltaTime;
+	public NeedleHost Target
+	{
+		get{ return target;}
+		set{ target = value;}
+	}
+	protected Rigidbody rigidBody;
 
 	// Use this for initialization
 	void Start () {
-	
+		rigidBody = GetComponent<Rigidbody> ();
+		rigidBody.velocity = transform.forward * travelSpeed;
 	}
 	
 	// Update is called once per frame
@@ -24,7 +32,19 @@ public class NeedleBehaviour : MonoBehaviour {
 		if (lifeLived > lifeTime) {
 			Expire ();
 		} else {
-			Fly ();
+			TrackTarget();
+		}
+	}
+
+	/// <summary>
+	/// Used purely to update the needle direction
+	/// </summary>
+	void LateUpdate()
+	{
+		if (isStuck)
+			return;
+		if (rigidBody.velocity.sqrMagnitude > 0) {
+			transform.forward = rigidBody.velocity.normalized;
 		}
 	}
 
@@ -46,6 +66,26 @@ public class NeedleBehaviour : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// If the target is not null, pushes the needle towards its target.
+	/// </summary>
+	void TrackTarget()
+	{
+		if (target == null || isStuck)
+			return;
+		//Get the vector to the target
+		Vector3 toTarget = target.transform.position - transform.position;
+		//store the length
+		float magnitude = toTarget.magnitude;
+		//normalize
+		toTarget /= magnitude;
+		//multiply by 1/length * scalar to diminish by distance than linearly strengthen
+		float trackStrength = 100;
+		Vector3 force = toTarget * (1 / magnitude) * trackStrength;
+		rigidBody.AddForce(force);
+		rigidBody.velocity *= 0.5f;
+	}
+
+	/// <summary>
 	/// Restart this needles life, preventing expiration
 	/// </summary>
 	public void Refresh()
@@ -61,17 +101,4 @@ public class NeedleBehaviour : MonoBehaviour {
 		//destroy the NeedleProjectile gameObject this is attached to
 		DestroyImmediate (this.gameObject);
 	}
-
-	/// <summary>
-	/// The needle will fly forward, based on travel speed and change in time.
-	/// </summary>
-	void Fly()
-	{
-		//do not move a needle which is stuck
-		if (isStuck)
-			return;
-		//Advance the needle forward based on direction, speed, and change in time
-		transform.position += transform.forward * travelSpeed * deltaTime;
-	}
-
 }
