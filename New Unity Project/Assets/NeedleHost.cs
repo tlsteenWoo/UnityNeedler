@@ -31,6 +31,7 @@ public class NeedleHost : MonoBehaviour {
 	protected Vector3 startingPosition;
 	protected NeedleBehaviour[] needles;
 	public ParticleSystem explosion;
+	protected Animator animator;
 
 	/// <summary>
 	/// Start health at maxHealth and construct needle array.
@@ -41,6 +42,7 @@ public class NeedleHost : MonoBehaviour {
 		Debug.Log (maxHealth);
 		needles = new NeedleBehaviour[explosionIndex];
 		startingPosition = transform.position;
+		animator = GetComponent<Animator> ();
 	}
 	
 	/// <summary>
@@ -103,6 +105,7 @@ public class NeedleHost : MonoBehaviour {
 	void onDeath()
 	{
 		//TODO: Play an animation
+		animator.SetBool ("dead", true);
 	}
 
 	/// <summary>
@@ -114,6 +117,7 @@ public class NeedleHost : MonoBehaviour {
 		respawnProgress = 0;
 		Health = maxHealth;
 		//TODO: Navigate away from death animation
+		animator.SetBool ("dead", false);
 	}
 
 	/// <summary>
