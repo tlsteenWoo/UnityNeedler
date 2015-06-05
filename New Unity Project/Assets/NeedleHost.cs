@@ -42,7 +42,6 @@ public class NeedleHost : MonoBehaviour {
 	/// </summary>
 	void Start () {
 		Health = maxHealth;
-		Debug.Log (maxHealth);
 		needles = new NeedleBehaviour[explosionIndex];
 		startingPosition = transform.position;
 		animator = GetComponent<Animator> ();

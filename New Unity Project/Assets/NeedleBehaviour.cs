@@ -7,6 +7,7 @@ using System.Collections;
 /// </summary>
 public class NeedleBehaviour : MonoBehaviour {
 	public bool isStuck{ get; protected set; }
+	protected bool isSecondLife;
 	//7 needles will kill a grunt dead
 	public int damage = 10;
 	public float travelSpeed = 1;
@@ -23,6 +24,7 @@ public class NeedleBehaviour : MonoBehaviour {
 	}
 	protected Rigidbody rigidBody;
 	public AudioClip impactSound;
+	public AudioClip expirationSound;
 	protected AudioSource audioSource;
 
 	/// <summary>
@@ -118,7 +120,15 @@ public class NeedleBehaviour : MonoBehaviour {
 	/// </summary>
 	public void Expire()
 	{
-		//destroy the NeedleProjectile gameObject this is attached to
-		Destroy(this.gameObject);
+		//Second life allows us to reuse the lifeLivedTimer
+		if (!isSecondLife) {
+			isSecondLife = true;
+			//obviously must be played before being destroyed (I didn't realize this)
+			audioSource.PlayOneShot (expirationSound, 1);
+			//destroy the NeedleProjectile gameObject this is attached to
+			lifeLived = lifeTime - 1;
+		} else {
+			Destroy (this.gameObject);
+		}
 	}
 }
