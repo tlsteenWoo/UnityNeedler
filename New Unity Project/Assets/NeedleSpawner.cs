@@ -44,13 +44,30 @@ public class NeedleSpawner : MonoBehaviour {
 
 		//refill ammo if we have infinite
 		if (infiniteAmmo && ammo == 0) {
-			ammo = ammoLimit;
+			Refill(ammoLimit);
 		}
 
 		//Try to automatically trigger
 		if (automatic) {
 			Trigger();
 		}
+	}
+
+	/// <summary>
+	/// Attempts to add the specified amount of ammo to current ammo.
+	/// Returns the final change in ammo;
+	/// </summary>
+	/// <param name="a_ammo">Amount of ammo to add (can be negative).</param>
+	public int Refill(int a_ammo)
+	{
+		//store current ammo
+		int startAmmo = ammo;
+		//ues the 'Ammo' property to change ammo appropriately
+		Ammo += a_ammo;
+		//get the difference in Ammo between startAmmo and what the Ammo property achieved
+		int ammoDelta = Ammo - startAmmo;
+		//return that difference, so that the player can remove ammo from their pocket accordingly
+		return ammoDelta;
 	}
 
 	/// <summary>
