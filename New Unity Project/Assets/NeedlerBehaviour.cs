@@ -10,9 +10,11 @@ using System.Collections;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
 public class NeedlerBehaviour : MonoBehaviour {
+	public Animator muzzleFlareAC;
 	protected Animator animator;
 	protected NeedleSpawner spawner;
 	protected AudioSource audioSource;
+	//this hash is reused for needlerAC and muzzleFlareAC
 	protected int shootTriggerHash;
 	protected int reloadTriggerHash;
 	public int reserveAmmo = 100;
@@ -39,6 +41,7 @@ public class NeedlerBehaviour : MonoBehaviour {
 		if (spawner.Trigger ()) {
 			audioSource.PlayOneShot(shootSound);
 			animator.SetTrigger(shootTriggerHash);
+			muzzleFlareAC.SetTrigger(shootTriggerHash);
 			return true;
 		}
 		return false;
