@@ -21,6 +21,13 @@ public class NeedleSpawner : MonoBehaviour {
 		get{ return ammo;}
 		set{ ammo = Mathf.Clamp(value,0,ammoLimit);}
 	}
+	/// <summary>
+	/// Room for ammo.
+	/// </summary>
+	public int AmmoSpace
+	{
+		get{ return ammoLimit - Ammo;}
+	}
 
 	// Use this for initialization
 	void Start () {

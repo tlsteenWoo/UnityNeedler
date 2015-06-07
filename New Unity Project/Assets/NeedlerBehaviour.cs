@@ -10,17 +10,17 @@ using System.Collections;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
 public class NeedlerBehaviour : MonoBehaviour {
-	public Animator muzzleFlareAC;
-	protected Animator animator;
-	protected NeedleSpawner spawner;
-	protected AudioSource audioSource;
+	protected bool isReloading;
 	//this hash is reused for needlerAC and muzzleFlareAC
 	protected int shootTriggerHash;
 	protected int reloadTriggerHash;
-	public int reserveAmmo = 100;
-	public int reserveAmmoLimit = 200;
+	public int ammoInbound{ get; protected set; }
 	public AudioClip shootSound;
 	public AudioClip reloadSound;
+	protected AudioSource audioSource;
+	public Animator muzzleFlareAC;
+	protected Animator animator;
+	public NeedleSpawner spawner{ get; protected set; }
 
 	/// <summary>
 	/// Store reference to animation controller and needle spawner.
@@ -48,28 +48,34 @@ public class NeedlerBehaviour : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Refill the spawner when the needler completes it's reload animation.
+	/// Check for ammo, if needed then begin the reload
 	/// </summary>
-	public bool Reload()
+	/// <returns>The amount of ammo that will be reloaded.</returns>
+	/// <param name="a_ammo">All ammo available for reloading.</param>
+	public int beginReload(int a_ammo)
 	{
-		//Return false if we have no ammo or the spawner is full
-		if (reserveAmmo <= 0 || spawner.Ammo == spawner.ammoLimit)
-			return false;
+		//return nothing if we got no ammo, or if the reload is already in action
+		if (a_ammo <= 0 || isReloading)
+			return 0;
 		//Commence reloading via animation
 		animator.SetTrigger (reloadTriggerHash);
+		isReloading = true;
 		//play reload sound as well
 		audioSource.PlayOneShot (reloadSound);
-		return true;
+		//use only as much space as we have
+		ammoInbound = Mathf.Min (spawner.AmmoSpace, a_ammo);
+		return ammoInbound;
 	}
 
 	/// <summary>
 	/// Triggered when the reload animation is successfully completed.
-	/// At this moment the needler should be refilled to reflect the animation.
+	/// At this moment the needler should be refilled with the inbound ammo, reflecting the animation.
+	/// Another reload becomes possible.
 	/// </summary>
 	public void onReloadComplete()
 	{
-		//refill as much ammo as we can
-		int ammoTaken = spawner.Refill (reserveAmmo);
-		reserveAmmo -= ammoTaken;
+		//refill as much ammo as we can, ammoInbound should be exactly what we need
+		spawner.Refill (ammoInbound);
+		isReloading = false;
 	}
 }

@@ -6,6 +6,7 @@ public class NeedlerHolder : MonoBehaviour {
 	public GameObject needlerPrefabAsset;
 	//Use GetNeedler to get, and set this variable directly if you must... its dirty
 	protected GameObject m_needler_dirty_ref;
+	protected NeedlerBehaviour m_needlerBehaviour_dirty_ref;
 	public bool needlerActive;
 
 
@@ -22,7 +23,7 @@ public class NeedlerHolder : MonoBehaviour {
 	/// <summary>
 	/// Tries to find a instance of needler as a child
 	/// </summary>
-	GameObject GetNeedler()
+	public GameObject GetOrFindNeedler()
 	{
 		//Check if we do not have an internal needler reference
 		if (m_needler_dirty_ref == null) {
@@ -34,9 +35,21 @@ public class NeedlerHolder : MonoBehaviour {
 			//did we find a needler child?
 			if (needleChild != null) {
 				m_needler_dirty_ref = needleChild.gameObject;
+				m_needlerBehaviour_dirty_ref = m_needler_dirty_ref.GetComponent<NeedlerBehaviour>();
 			}		
 		}
 		return m_needler_dirty_ref;
+	}
+
+	/// <summary>
+	/// Returns the needlerBehaviour reference, and tries to find one if it is null.
+	/// </summary>
+	/// <returns>The needler behaviour reference.</returns>
+	public NeedlerBehaviour GetOrFindNeedlerBehaviour()
+	{
+		if (!m_needlerBehaviour_dirty_ref)
+			GetOrFindNeedler ();
+		return m_needlerBehaviour_dirty_ref;
 	}
 
 	/// <summary>
@@ -45,9 +58,10 @@ public class NeedlerHolder : MonoBehaviour {
 	void tryCreateNeedler()
 	{
 		//Check if we do not have a needler
-		if (!GetNeedler ()) {
-			//no needler exists so create one, and store the reference
+		if (!GetOrFindNeedler ()) {
+			//no needler exists so create one, and store the reference to the GameObject and behaviour
 			m_needler_dirty_ref = (GameObject)Instantiate (needlerPrefabAsset, transform.position, transform.rotation);
+			m_needlerBehaviour_dirty_ref = m_needler_dirty_ref.GetComponent<NeedlerBehaviour>();
 			//make the needler a child
 			m_needler_dirty_ref.transform.SetParent(this.transform);
 		}
@@ -59,7 +73,7 @@ public class NeedlerHolder : MonoBehaviour {
 	void tryDestroyNeedler()
 	{
 		//Check if we do have a needler
-		if (GetNeedler ()) {
+		if (GetOrFindNeedler ()) {
 			DestroyImmediate(m_needler_dirty_ref);
 		}
 	}
