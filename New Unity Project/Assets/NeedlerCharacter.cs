@@ -93,6 +93,8 @@ public class NeedlerCharacter : MonoBehaviour {
 	void Update () {
 		//TODO: Remove this test
 		Shoot (0);
+		//TODO: Manage reserve ammo in a property
+		reserveAmmo = Mathf.Clamp (reserveAmmo, 0, reserveAmmoLimit);
 		AutomaticReload (needlerHolderL);
 		AutomaticReload (needlerHolderR);
 	}
