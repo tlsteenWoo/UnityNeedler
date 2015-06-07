@@ -43,7 +43,7 @@ public class NeedlerCharacter : MonoBehaviour {
 	/// <param name="a_holder">Any needler holder.</param>
 	bool shootIndividual(NeedlerHolder a_holder)
 	{
-		if (!a_holder.needlerActive)
+		if (!a_holder.IsNeedlerReady)
 			return false;
 		var needler = a_holder.GetOrFindNeedlerBehaviour ();
 		if (!needler)
@@ -78,7 +78,7 @@ public class NeedlerCharacter : MonoBehaviour {
 	/// <param name="a_holder">Any needler holder.</param>
 	bool reloadIndividual(NeedlerHolder a_holder)
 	{
-		if (!a_holder.needlerActive)
+		if (!a_holder.IsNeedlerReady)
 			return false;
 		var needler = a_holder.GetOrFindNeedlerBehaviour ();
 		if (!needler)
@@ -104,6 +104,8 @@ public class NeedlerCharacter : MonoBehaviour {
 	/// <param name="a_holder">The holder to check for emptiness.</param>
 	void AutomaticReload(NeedlerHolder a_holder)
 	{
+		if (!a_holder.IsNeedlerReady)
+			return;
 		if (a_holder.GetOrFindNeedlerBehaviour ().spawner.Ammo == 0)
 			reloadIndividual (a_holder);
 	}

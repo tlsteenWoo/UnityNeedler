@@ -7,7 +7,27 @@ public class NeedlerHolder : MonoBehaviour {
 	//Use GetNeedler to get, and set this variable directly if you must... its dirty
 	protected GameObject m_needler_dirty_ref;
 	protected NeedlerBehaviour m_needlerBehaviour_dirty_ref;
-	public bool needlerActive;
+	public bool needlerShouldExist;
+	protected bool needlerDoesExist;
+	/// <summary>
+	/// Determines whether or not the needler is ready for use.
+	/// </summary>
+	/// <value>Needler capacity for usage.</value>
+	public bool IsNeedlerReady {
+		get {
+			if(needlerShouldExist)
+			{
+				//make sure it does exist, otherwise it's not ready
+				if(needlerDoesExist) return true;
+				else return false;
+			}
+			else
+			{
+				//if it does exist it's still not ready
+				return false;
+			}
+		}
+	}
 
 
 	// Use this for initialization
@@ -36,6 +56,7 @@ public class NeedlerHolder : MonoBehaviour {
 			if (needleChild != null) {
 				m_needler_dirty_ref = needleChild.gameObject;
 				m_needlerBehaviour_dirty_ref = m_needler_dirty_ref.GetComponent<NeedlerBehaviour>();
+				needlerDoesExist = true;
 			}		
 		}
 		return m_needler_dirty_ref;
@@ -64,6 +85,7 @@ public class NeedlerHolder : MonoBehaviour {
 			m_needlerBehaviour_dirty_ref = m_needler_dirty_ref.GetComponent<NeedlerBehaviour>();
 			//make the needler a child
 			m_needler_dirty_ref.transform.SetParent(this.transform);
+			needlerDoesExist = true;
 		}
 	}
 
@@ -75,6 +97,7 @@ public class NeedlerHolder : MonoBehaviour {
 		//Check if we do have a needler
 		if (GetOrFindNeedler ()) {
 			DestroyImmediate(m_needler_dirty_ref);
+			needlerDoesExist = false;
 		}
 	}
 	/// <summary>
@@ -82,7 +105,7 @@ public class NeedlerHolder : MonoBehaviour {
 	/// </summary>
 	void updateNeedler()
 	{
-		if (needlerActive) {
+		if (needlerShouldExist) {
 			tryCreateNeedler();
 		} else {
 			tryDestroyNeedler();

@@ -10,6 +10,8 @@ using System.Collections;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
 public class NeedlerBehaviour : MonoBehaviour {
+	//The needler was somehow being used before it had started
+	protected bool hasStarted;
 	protected bool isReloading;
 	//this hash is reused for needlerAC and muzzleFlareAC
 	protected int shootTriggerHash;
@@ -21,11 +23,12 @@ public class NeedlerBehaviour : MonoBehaviour {
 	public Animator muzzleFlareAC;
 	protected Animator animator;
 	public NeedleSpawner spawner{ get; protected set; }
-
+	
 	/// <summary>
 	/// Store reference to animation controller and needle spawner.
 	/// </summary>
-	void Start () {
+	void Awake()
+	{
 		animator = GetComponent<Animator> ();
 		spawner = GetComponent<NeedleSpawner> ();
 		audioSource = GetComponent<AudioSource> ();
@@ -61,7 +64,7 @@ public class NeedlerBehaviour : MonoBehaviour {
 		animator.SetTrigger (reloadTriggerHash);
 		isReloading = true;
 		//play reload sound as well
-		audioSource.PlayOneShot (reloadSound);
+		audioSource.Play ();
 		//use only as much space as we have
 		ammoInbound = Mathf.Min (spawner.AmmoSpace, a_ammo);
 		return ammoInbound;
