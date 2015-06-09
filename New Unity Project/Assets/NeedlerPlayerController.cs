@@ -7,7 +7,9 @@ using System.Collections;
 /// </summary>
 [RequireComponent(typeof(NeedlerCharacter))]
 public class NeedlerPlayerController : MonoBehaviour {
-	NeedlerCharacter needlerChar;
+	protected NeedlerCharacter needlerChar;
+	public CharacterController charController;
+	public float speed = 1;
 
 	/// <summary>
 	/// Obtain the needler character component.
@@ -23,6 +25,7 @@ public class NeedlerPlayerController : MonoBehaviour {
 	void Update()
 	{
 		ControlNeedlerCharacter ();
+		ControlCharacterController();
 	}
 
 	/// <summary>
@@ -36,5 +39,22 @@ public class NeedlerPlayerController : MonoBehaviour {
 			needlerChar.Shoot (1);
 		if (Input.GetButton ("Reload"))
 			needlerChar.Reload (0);
+		needlerChar.Turn (Input.GetAxis ("Turn"));
+		needlerChar.Look (Input.GetAxis ("Look"));
+	}
+
+	/// <summary>
+	/// Acquires user input to control a specified character controller.
+	/// </summary>
+	void ControlCharacterController()
+	{
+		if (charController == null)
+			return;
+		float horizontal = Input.GetAxis ("Horizontal");
+		float vertical = Input.GetAxis ("Vertical");
+		Vector3 sideways = charController.gameObject.transform.right * speed * horizontal;
+		Vector3 frontways = charController.gameObject.transform.forward * speed * vertical;
+		Vector3 movement = sideways + frontways;
+		charController.Move (movement); 
 	}
 }
