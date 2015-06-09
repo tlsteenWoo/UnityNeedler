@@ -38,7 +38,7 @@ public class NeedlerCharacter : MonoBehaviour {
 			oohShotsFired = oohShotsFired || shootIndividual(needlerHolderL);
 		}
 		//shoot right
-		if(needlerHolderIndex == 0 || needlerHolderIndex == -1)
+		if(needlerHolderIndex == 0 || needlerHolderIndex == 1)
 		{
 			oohShotsFired = oohShotsFired || shootIndividual(needlerHolderR);
 		}
@@ -73,7 +73,7 @@ public class NeedlerCharacter : MonoBehaviour {
 			reloadFlag = reloadFlag || reloadIndividual(needlerHolderL);
 		}
 		//shoot right
-		if(needlerHolderIndex == 0 || needlerHolderIndex == -1)
+		if(needlerHolderIndex == 0 || needlerHolderIndex == 1)
 		{
 			reloadFlag = reloadFlag || reloadIndividual(needlerHolderR);
 		}
@@ -92,8 +92,10 @@ public class NeedlerCharacter : MonoBehaviour {
 		var needler = a_holder.GetOrFindNeedlerBehaviour ();
 		if (!needler)
 			return false;
-		reserveAmmo -= needler.beginReload (reserveAmmo);
-		return reserveAmmo != 0;
+		int ammoTaken = needler.beginReload (reserveAmmo);
+		reserveAmmo -= ammoTaken;
+		//if ammo taken is equal to 0 then the reload didnt occur
+		return ammoTaken != 0;
 	}
 
 	/// <summary>
@@ -154,8 +156,6 @@ public class NeedlerCharacter : MonoBehaviour {
 	/// Automatically reload empty needlers
 	/// </summary>
 	void Update () {
-		//TODO: Remove this test
-		Shoot (0);
 		if (target != null) {
 			Vector3 targetPos = target.transform.position;
 			if(target.representative)

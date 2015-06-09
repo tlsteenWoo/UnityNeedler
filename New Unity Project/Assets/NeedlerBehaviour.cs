@@ -57,8 +57,8 @@ public class NeedlerBehaviour : MonoBehaviour {
 	/// <param name="a_ammo">All ammo available for reloading.</param>
 	public int beginReload(int a_ammo)
 	{
-		//return nothing if we got no ammo, or if the reload is already in action
-		if (a_ammo <= 0 || isReloading)
+		//return nothing if we got no ammo, or if the reload is already in action, or if the spawner is full
+		if (a_ammo <= 0 || isReloading || spawner.AmmoSpace == 0)
 			return 0;
 		//Commence reloading via animation
 		animator.SetTrigger (reloadTriggerHash);
