@@ -7,6 +7,7 @@ using System.Collections;
 [ExecuteInEditMode]
 public class NodeContainer : MonoBehaviour {
 	public bool addNode = false;
+	public bool isClosedLoop = false;
 	public float downwardsRayLength = 10;
 	public GameObject node;
 	protected GameObject[] nodes;
@@ -15,6 +16,32 @@ public class NodeContainer : MonoBehaviour {
 	void Awake()
 	{
 		addNode = false;
+	}
+
+	public int Count()
+	{
+		tryUpdateNodes();
+		return nodes.Length;
+	}
+
+	public GameObject GetNode(int i)
+	{
+		tryUpdateNodes ();
+		return nodes [i];
+	}
+
+	bool tryUpdateNodes()
+	{
+		//node array should synchronize with children if it has an inccorect length
+		if (nodes == null || nodes.Length != transform.childCount) {
+			nodes = null;
+			nodes = new GameObject[transform.childCount];
+			for (int c = 0; c < transform.childCount; ++c) {
+				nodes [c] = transform.GetChild(c).gameObject;
+			}
+			return true;
+		}
+		return false;
 	}
 
 	/// <summary>
@@ -31,24 +58,26 @@ public class NodeContainer : MonoBehaviour {
 			newNode.name = node.name + '_' + (transform.childCount);
 			newNode.transform.SetParent(this.transform);
 		}
-		//node array should synchronize with children if it has an inccorect length
-		if (nodes == null || nodes.Length != transform.childCount) {
-			nodes = null;
-			nodes = new GameObject[transform.childCount];
-			for (int c = 0; c < transform.childCount; ++c) {
-				nodes [c] = transform.GetChild(c).gameObject;
-			}
-		}
+		tryUpdateNodes ();
 		//draw connections
 		if (nodes.Length > 0) {
 			for (int i = 0; i < nodes.Length; ++i) {
 				//Draw a ray downwards to help find the ground
 				Vector3 position = nodes[i].transform.position;
 				Debug.DrawLine (position, position + Vector3.down * downwardsRayLength, Color.red);
-				//skip the first node since we draw lines backwards
-				if(i == 0) continue;
-				//draw the line to the previous node
-				Debug.DrawLine (position, nodes [i - 1].transform.position, Color.cyan);
+				//we draw lines backwards, so only draw the first one backwards if it is a closed loop
+				if(i == 0)
+				{
+					if(isClosedLoop)
+					{
+						Debug.DrawLine(position, nodes[nodes.Length-1].transform.position, Color.cyan);
+					}
+				}
+				else
+				{
+					//draw the line to the previous node
+					Debug.DrawLine (position, nodes [i - 1].transform.position, Color.cyan);
+				}
 			}
 		}
 	}

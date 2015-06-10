@@ -55,6 +55,6 @@ public class NeedlerPlayerController : MonoBehaviour {
 		Vector3 sideways = charController.gameObject.transform.right * speed * horizontal;
 		Vector3 frontways = charController.gameObject.transform.forward * speed * vertical;
 		Vector3 movement = sideways + frontways;
-		charController.Move (movement); 
+		charController.SimpleMove (movement); 
 	}
 }
