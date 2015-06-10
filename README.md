@@ -1,7 +1,12 @@
 # UnityNeedler
 Creating a unity version of the needler, from Halo.
 
-In Progress 6/8/15
+#Progress
+6/10/15: Feature complete according to initial designs. Now replacing placeholders. Many bug fixes will be done.
+
+![Imgur](http://i.imgur.com/kY60uCW.png "Needler Screenshot 6/10/15")
+
+6/8/15 
 
 ![Dual-Wield Needlers with auto-aim](http://i.imgur.com/bc07Whn.png "Needler Screenshot 6/8/15")
 
