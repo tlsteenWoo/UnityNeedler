@@ -9,16 +9,64 @@ ModelImporter:
     100002: Bone
     100004: Cube
     100006: //RootNode
+    100008: Barrel
+    100010: Chassis_Bot
+    100012: Needle
+    100014: Needle_001
+    100016: Needle_002
+    100018: Needle_003
+    100020: Needle_004
+    100022: Needle_005
+    100024: Needle_006
+    100026: NeedleHolder
+    100028: Rest
+    100030: Trigger
     400000: Armature
     400002: Bone
     400004: Cube
     400006: //RootNode
+    400008: Barrel
+    400010: Chassis_Bot
+    400012: Needle
+    400014: Needle_001
+    400016: Needle_002
+    400018: Needle_003
+    400020: Needle_004
+    400022: Needle_005
+    400024: Needle_006
+    400026: NeedleHolder
+    400028: Rest
+    400030: Trigger
     4300000: Cube
+    4300002: Trigger
+    4300004: Rest
+    4300006: NeedleHolder
+    4300008: Needle_006
+    4300010: Needle_005
+    4300012: Needle_004
+    4300014: Needle_003
+    4300016: Needle_002
+    4300018: Needle_001
+    4300020: Needle
+    4300022: Chassis_Bot
+    4300024: Barrel
     7400000: Default Take
     7400002: Reload
     7400004: Shoot
     9500000: //RootNode
     13700000: Cube
+    13700002: Barrel
+    13700004: Chassis_Bot
+    13700006: Needle
+    13700008: Needle_001
+    13700010: Needle_002
+    13700012: Needle_003
+    13700014: Needle_004
+    13700016: Needle_005
+    13700018: Needle_006
+    13700020: NeedleHolder
+    13700022: Rest
+    13700024: Trigger
   materials:
     importMaterials: 1
     materialName: 0
@@ -165,7 +213,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
-    normalImportMode: 0
+    normalImportMode: 1
     tangentImportMode: 1
   importAnimation: 1
   copyAvatar: 0

@@ -9,15 +9,54 @@ ModelImporter:
     100002: Bone
     100004: Cube
     100006: //RootNode
+    100008: Crotch_L
+    100010: Crotch_R
+    100012: Dingus
+    100014: Forearm_L
+    100016: Forearm_R
+    100018: Grunt
+    100020: Head
+    100022: Leg_L
+    100024: Leg_R
+    100026: Neck
+    100028: Pelvis
+    100030: Shoulder_L
+    100032: Shoulder_R
+    100034: Thigh_Left
+    100036: Thigh_R
+    100038: Torso
+    100040: UpperArm_L
+    100042: UpperArm_R
     400000: Armature
     400002: Bone
     400004: Cube
     400006: //RootNode
+    400008: Crotch_L
+    400010: Crotch_R
+    400012: Dingus
+    400014: Forearm_L
+    400016: Forearm_R
+    400018: Grunt
+    400020: Head
+    400022: Leg_L
+    400024: Leg_R
+    400026: Neck
+    400028: Pelvis
+    400030: Shoulder_L
+    400032: Shoulder_R
+    400034: Thigh_Left
+    400036: Thigh_R
+    400038: Torso
+    400040: UpperArm_L
+    400042: UpperArm_R
     4300000: Cube
+    4300002: Grunt
     7400000: Default Take
     7400002: Death
+    7400004: Jog
     9500000: //RootNode
     13700000: Cube
+    13700002: Grunt
   materials:
     importMaterials: 1
     materialName: 0
@@ -33,7 +72,205 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Default Take
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Dingus
+        weight: 1
+      - path: Armature/Dingus/Crotch_L
+        weight: 1
+      - path: Armature/Dingus/Crotch_L/Thigh_Left
+        weight: 1
+      - path: Armature/Dingus/Crotch_L/Thigh_Left/Leg_L
+        weight: 1
+      - path: Armature/Dingus/Crotch_R
+        weight: 1
+      - path: Armature/Dingus/Crotch_R/Thigh_R
+        weight: 1
+      - path: Armature/Dingus/Crotch_R/Thigh_R/Leg_R
+        weight: 1
+      - path: Armature/Dingus/Pelvis
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Neck
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Neck/Head
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_L
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_L/UpperArm_L
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_L/UpperArm_L/Forearm_L
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_R
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_R/UpperArm_R
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_R/UpperArm_R/Forearm_R
+        weight: 1
+      - path: Grunt
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Death
+      takeName: Death
+      firstFrame: 0
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Dingus
+        weight: 1
+      - path: Armature/Dingus/Crotch_L
+        weight: 1
+      - path: Armature/Dingus/Crotch_L/Thigh_Left
+        weight: 1
+      - path: Armature/Dingus/Crotch_L/Thigh_Left/Leg_L
+        weight: 1
+      - path: Armature/Dingus/Crotch_R
+        weight: 1
+      - path: Armature/Dingus/Crotch_R/Thigh_R
+        weight: 1
+      - path: Armature/Dingus/Crotch_R/Thigh_R/Leg_R
+        weight: 1
+      - path: Armature/Dingus/Pelvis
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Neck
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Neck/Head
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_L
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_L/UpperArm_L
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_L/UpperArm_L/Forearm_L
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_R
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_R/UpperArm_R
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_R/UpperArm_R/Forearm_R
+        weight: 1
+      - path: Grunt
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Jog
+      takeName: Jog
+      firstFrame: 0
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Dingus
+        weight: 1
+      - path: Armature/Dingus/Crotch_L
+        weight: 1
+      - path: Armature/Dingus/Crotch_L/Thigh_Left
+        weight: 1
+      - path: Armature/Dingus/Crotch_L/Thigh_Left/Leg_L
+        weight: 1
+      - path: Armature/Dingus/Crotch_R
+        weight: 1
+      - path: Armature/Dingus/Crotch_R/Thigh_R
+        weight: 1
+      - path: Armature/Dingus/Crotch_R/Thigh_R/Leg_R
+        weight: 1
+      - path: Armature/Dingus/Pelvis
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Neck
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Neck/Head
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_L
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_L/UpperArm_L
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_L/UpperArm_L/Forearm_L
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_R
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_R/UpperArm_R
+        weight: 1
+      - path: Armature/Dingus/Pelvis/Torso/Shoulder_R/UpperArm_R/Forearm_R
+        weight: 1
+      - path: Grunt
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -55,7 +292,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
-    normalImportMode: 0
+    normalImportMode: 1
     tangentImportMode: 1
   importAnimation: 1
   copyAvatar: 0
