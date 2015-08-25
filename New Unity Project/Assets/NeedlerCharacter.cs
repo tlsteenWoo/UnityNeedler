@@ -33,12 +33,12 @@ public class NeedlerCharacter : MonoBehaviour {
 	{
 		bool oohShotsFired = false;
 		//shoot left
-		if(needlerHolderIndex == 0 || needlerHolderIndex == -1)
+		if(needlerHolderL && (needlerHolderIndex == 0 || needlerHolderIndex == -1))
 		{
 			oohShotsFired = oohShotsFired || shootIndividual(needlerHolderL);
 		}
 		//shoot right
-		if(needlerHolderIndex == 0 || needlerHolderIndex == 1)
+		if(needlerHolderR && (needlerHolderIndex == 0 || needlerHolderIndex == 1))
 		{
 			oohShotsFired = oohShotsFired || shootIndividual(needlerHolderR);
 		}
@@ -167,8 +167,10 @@ public class NeedlerCharacter : MonoBehaviour {
 		UpdateOrientation ();
 		//TODO: Manage reserve ammo in a property
 		reserveAmmo = Mathf.Clamp (reserveAmmo, 0, reserveAmmoLimit);
-		AutomaticReload (needlerHolderL);
-		AutomaticReload (needlerHolderR);
+		if(needlerHolderL)
+			AutomaticReload (needlerHolderL);
+		if(needlerHolderR)
+			AutomaticReload (needlerHolderR);
 	}
 	/// <summary>
 	/// Automatically reloads a needlerHolder if it is empty.

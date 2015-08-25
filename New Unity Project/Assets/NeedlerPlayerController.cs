@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 /// <summary>
@@ -39,8 +40,8 @@ public class NeedlerPlayerController : MonoBehaviour {
 			needlerChar.Shoot (1);
 		if (Input.GetButton ("Reload"))
 			needlerChar.Reload (0);
-		needlerChar.Turn (Input.GetAxis ("Turn"));
-		needlerChar.Look (Input.GetAxis ("Look"));
+		needlerChar.Turn (Input.GetAxis ("Mouse X"));
+		needlerChar.Look (Input.GetAxis ("Mouse Y"));
 	}
 
 	/// <summary>
@@ -52,6 +53,11 @@ public class NeedlerPlayerController : MonoBehaviour {
 			return;
 		float horizontal = Input.GetAxis ("Horizontal");
 		float vertical = Input.GetAxis ("Vertical");
+		//TODO: Make a debug option
+		string debug = string.Format ("Strafe: {0:F1}, Walk: {1:F1}", horizontal * speed, vertical * speed);
+		var dbg = GameObject.FindObjectOfType<DebugWindow> ();
+		if (dbg)
+			dbg.LOG (debug);
 		Vector3 sideways = charController.gameObject.transform.right * speed * horizontal;
 		Vector3 frontways = charController.gameObject.transform.forward * speed * vertical;
 		Vector3 movement = sideways + frontways;
