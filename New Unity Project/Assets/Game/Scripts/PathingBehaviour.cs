@@ -11,6 +11,11 @@ public class PathingBehaviour : MonoBehaviour {
 	public float reachThreshold = 0.5f;
 	public NodeContainer path;
 	public CharacterController controller;
+	public NodeContainer GetSetPath
+	{
+		get{ return path;}
+		set{ path = value;}
+	}
 	
 	void Update()
 	{

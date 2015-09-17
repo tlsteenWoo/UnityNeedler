@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 
 public class NeedleHost : MonoBehaviour {
@@ -30,9 +31,8 @@ public class NeedleHost : MonoBehaviour {
 	public float maxHealth = 100;
 	protected Vector3 startingPosition;
 	protected NeedleBehaviour[] needles;
-	public ParticleSystem explosionVfx;
+	public UnityEvent onExplosion;
 	protected Animator animator;
-	public AudioClip explosionSound;
 	protected AudioSource audioSource;
 	public SkinnedMeshRenderer representative;
 
@@ -96,8 +96,8 @@ public class NeedleHost : MonoBehaviour {
 	{
 		//Reset first in case the host dies
 		Reset ();
-		explosionVfx.Play ();
-		audioSource.PlayOneShot (explosionSound, 1);
+		if(onExplosion != null)
+			onExplosion.Invoke ();
 		Health -= explosionDamage;
 	}
 
