@@ -48,10 +48,10 @@ public class NeedlerHolder : MonoBehaviour {
 		//Check if we do not have an internal needler reference
 		if (m_needler_dirty_ref == null) {
 			//search for a needler child and update the instance if there is one
-			var needleChild = transform.FindChild (needlerPrefabAsset.name);
+			var needleChild = transform.Find (needlerPrefabAsset.name);
 			//search for a clone as well
 			if(needleChild == null)
-				needleChild = transform.FindChild(needlerPrefabAsset.name+"(Clone)");
+				needleChild = transform.Find(needlerPrefabAsset.name+"(Clone)");
 			//did we find a needler child?
 			if (needleChild != null) {
 				m_needler_dirty_ref = needleChild.gameObject;
