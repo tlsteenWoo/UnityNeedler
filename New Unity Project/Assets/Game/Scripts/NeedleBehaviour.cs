@@ -123,12 +123,19 @@ public class NeedleBehaviour : MonoBehaviour {
 		//Second life allows us to reuse the lifeLivedTimer
 		if (!isSecondLife) {
 			isSecondLife = true;
-			//obviously must be played before being destroyed (I didn't realize this)
-			audioSource.PlayOneShot (expirationSound, 1);
-			//destroy the NeedleProjectile gameObject this is attached to
+			if (expirationSound != null && expirationSound.loadState == AudioDataLoadState.Loaded)
+			{
+				//obviously must be played before being destroyed (I didn't realize this)
+				audioSource.PlayOneShot(expirationSound, 1);
+			}
 			lifeLived = lifeTime - 1;
-		} else {
-			Destroy (this.gameObject);
+		} else
+		{
+			//destroy the NeedleProjectile gameObject this is attached to
+			if (this.gameObject != null)
+			{
+				Destroy(this.gameObject);
+			}
 		}
 	}
 }

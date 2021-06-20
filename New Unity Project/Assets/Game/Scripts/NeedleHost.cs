@@ -71,7 +71,8 @@ public class NeedleHost : MonoBehaviour {
 	void Reset()
 	{
 		for (int i = 0; i < needleCount; ++i) {
-			needles[i].Expire();
+			if(needles[i] != null)
+				needles[i].Expire();
 		}
 		needleCount = 0;
 		explosionResetProgress = 0;

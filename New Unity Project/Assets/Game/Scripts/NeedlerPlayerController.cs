@@ -41,7 +41,7 @@ public class NeedlerPlayerController : MonoBehaviour {
 		if (Input.GetButton ("Reload"))
 			needlerChar.Reload (0);
 		needlerChar.Turn (Input.GetAxis ("Mouse X"));
-		needlerChar.Look (Input.GetAxis ("Mouse Y"));
+		needlerChar.Look (-Input.GetAxis ("Mouse Y"));
 	}
 
 	/// <summary>
